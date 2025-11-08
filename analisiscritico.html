@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Notebooks with MyST Markdown &#8212; MiniProyecto 3</title>
+    <title>Análisis crítico &#8212; MiniProyecto 3</title>
   
   
   
@@ -181,7 +181,7 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="eda.html"><strong>Análisis Exploratorio de Datos</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="modelos.html"><strong>Implementación de modelos</strong></a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Notebooks with MyST Markdown</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Análisis crítico</strong></a></li>
 </ul>
 
     </div>
@@ -283,7 +283,7 @@
       
       
       
-      <li><a href="_sources/analisiscritico.md" target="_blank"
+      <li><a href="_sources/analisiscritico.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -293,7 +293,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -367,7 +367,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Notebooks with MyST Markdown</h1>
+    <h1>Análisis crítico</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -377,9 +377,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-cell">An example cell</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-notebook-with-myst-markdown">Create a notebook with MyST Markdown</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quickly-add-yaml-metadata-for-myst-notebooks">Quickly add YAML metadata for MyST Notebooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-de-metricas"><strong>Tabla comparativa de métricas</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#posibles-razones"><strong>Posibles razones</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones"><strong>Limitaciones</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recomendaciones-de-mejora"><strong>Recomendaciones de mejora</strong></a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -391,45 +394,168 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="notebooks-with-myst-markdown">
-<h1>Notebooks with MyST Markdown<a class="headerlink" href="#notebooks-with-myst-markdown" title="Link to this heading">#</a></h1>
-<p>Jupyter Book also lets you write text-based notebooks using MyST Markdown.
-See <a class="reference external" href="https://jupyterbook.org/file-types/myst-notebooks.html">the Notebooks with MyST Markdown documentation</a> for more detailed instructions.
-This page shows off a notebook written in MyST Markdown.</p>
-<section id="an-example-cell">
-<h2>An example cell<a class="headerlink" href="#an-example-cell" title="Link to this heading">#</a></h2>
-<p>With MyST Markdown, you can define code cells with a directive like so:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="analisis-critico">
+<h1><strong>Análisis crítico</strong><a class="headerlink" href="#analisis-critico" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>When your book is built, the contents of any <code class="docutils literal notranslate"><span class="pre">{code-cell}</span></code> blocks will be
-executed with your default Jupyter kernel, and their outputs will be displayed
-in-line with the rest of your content.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p>Jupyter Book uses <a class="reference external" href="https://jupytext.readthedocs.io/en/latest/">Jupytext</a> to convert text-based files to notebooks, and can support <a class="reference external" href="https://jupyterbook.org/file-types/jupytext.html">many other text-based notebook files</a>.</p>
-</div>
-</section>
-<section id="create-a-notebook-with-myst-markdown">
-<h2>Create a notebook with MyST Markdown<a class="headerlink" href="#create-a-notebook-with-myst-markdown" title="Link to this heading">#</a></h2>
-<p>MyST Markdown notebooks are defined by two things:</p>
-<ol class="arabic simple">
-<li><p>YAML metadata that is needed to understand if / how it should convert text files to notebooks (including information about the kernel needed).
-See the YAML at the top of this page for example.</p></li>
-<li><p>The presence of <code class="docutils literal notranslate"><span class="pre">{code-cell}</span></code> directives, which will be executed with your book.</p></li>
-</ol>
-<p>That’s all that is needed to get started!</p>
-</section>
-<section id="quickly-add-yaml-metadata-for-myst-notebooks">
-<h2>Quickly add YAML metadata for MyST Notebooks<a class="headerlink" href="#quickly-add-yaml-metadata-for-myst-notebooks" title="Link to this heading">#</a></h2>
-<p>If you have a markdown file and you’d like to quickly add YAML metadata to it, so that Jupyter Book will treat it as a MyST Markdown Notebook, run the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span><span class="o">-</span><span class="n">book</span> <span class="n">myst</span> <span class="n">init</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">markdownfile</span><span class="o">.</span><span class="n">md</span>
+<section id="tabla-comparativa-de-metricas">
+<h2><strong>Tabla comparativa de métricas</strong><a class="headerlink" href="#tabla-comparativa-de-metricas" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">BASE_DIR</span> <span class="o">=</span> <span class="s2">&quot;../fasttext_run&quot;</span> 
+<span class="n">pickles</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;DistilBERT&quot;</span><span class="p">:</span> <span class="s2">&quot;distilbert_summary.pkl&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Word2Vec_BiLSTM&quot;</span><span class="p">:</span> <span class="s2">&quot;word2vec_info.pkl&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CNN&quot;</span><span class="p">:</span> <span class="s2">&quot;cnn_info.pkl&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;XGBoost&quot;</span><span class="p">:</span> <span class="s2">&quot;xgb_info.pkl&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FastText&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s2">&quot;fasttext_summary.pkl&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">row_names</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;DistilBert Fine Tune&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Word2Vec + BiLSTM&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CNN-1D&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TF-IDF + XGBoost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FastText&quot;</span>
+<span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">normalize_metrics</span><span class="p">(</span><span class="n">metrics_dict</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;Accuracy&quot;</span><span class="p">:</span> <span class="n">metrics_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Accuracy&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;Precision (Macro)&quot;</span><span class="p">:</span> <span class="n">metrics_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Precision (Macro)&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">metrics_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Precision_Macro&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;Recall (Macro)&quot;</span><span class="p">:</span> <span class="n">metrics_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Recall (Macro)&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">metrics_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Recall_Macro&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;F1-Score (Macro)&quot;</span><span class="p">:</span> <span class="n">metrics_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;F1-Score (Macro)&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">metrics_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;F1_Macro&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;ROC AUC (Macro)&quot;</span><span class="p">:</span> <span class="n">metrics_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ROC AUC (Macro)&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">metrics_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ROC_AUC_Macro&quot;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">pickles</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">metrics</span> <span class="o">=</span> <span class="n">normalize_metrics</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;metrics_test&quot;</span><span class="p">])</span>
+    <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
+
+<span class="n">resultados</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">row_names</span><span class="p">)</span>
+
+<span class="n">resultados</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-11-08 17:33:59.401786: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-11-08 17:33:59.467338: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-11-08 17:34:00.847528: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1762641243.142228    2763 gpu_device.cc:2020] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 1765 MB memory:  -&gt; device: 0, name: NVIDIA GeForce RTX 3050 Laptop GPU, pci bus id: 0000:01:00.0, compute capability: 8.6
+/home/valcd/miniconda3/envs/wslenv/lib/python3.10/site-packages/keras/src/saving/saving_lib.py:797: UserWarning: Skipping variable loading for optimizer &#39;rmsprop&#39;, because it has 13 variables whereas the saved optimizer has 24 variables. 
+  saveable.load_own_variables(weights_store.get(inner_path))
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Accuracy</th>
+      <th>Precision (Macro)</th>
+      <th>Recall (Macro)</th>
+      <th>F1-Score (Macro)</th>
+      <th>ROC AUC (Macro)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>DistilBert Fine Tune</th>
+      <td>0.823056</td>
+      <td>0.772386</td>
+      <td>0.772137</td>
+      <td>0.766004</td>
+      <td>0.957838</td>
+    </tr>
+    <tr>
+      <th>Word2Vec + BiLSTM</th>
+      <td>0.756032</td>
+      <td>0.702512</td>
+      <td>0.705388</td>
+      <td>0.696467</td>
+      <td>0.945301</td>
+    </tr>
+    <tr>
+      <th>CNN-1D</th>
+      <td>0.788204</td>
+      <td>0.764300</td>
+      <td>0.740643</td>
+      <td>0.739106</td>
+      <td>0.960109</td>
+    </tr>
+    <tr>
+      <th>TF-IDF + XGBoost</th>
+      <td>0.825737</td>
+      <td>0.791440</td>
+      <td>0.780680</td>
+      <td>0.777748</td>
+      <td>0.982200</td>
+    </tr>
+    <tr>
+      <th>FastText</th>
+      <td>0.672922</td>
+      <td>0.646081</td>
+      <td>0.632390</td>
+      <td>0.631480</td>
+      <td>0.953611</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Para la realización de este ejercicio, se escogieron como métricas de interés <strong>F1-Score Macro</strong> y <strong>ROC AUC Macro</strong>, con el fin de evaluar el desempeño general de los modelos, considerando tanto la precisión en cada clase como la capacidad global de discriminación entre clases.</p>
+<p>A partir de la tabla comparativa de métricas, se observa que el mejor modelo en este caso fue <strong><code class="docutils literal notranslate"><span class="pre">TF-IDF</span> <span class="pre">+</span> <span class="pre">XGBoost</span></code></strong>, alcanzando los valores más altos en ambas métricas. Esto indica que, en términos generales, este modelo logra un buen equilibrio entre precisión y recall en todas las clases, así como una sólida capacidad de clasificación multiclase según corresponda.</p>
+<p>También se observa que, en general, todos los modelos lograron distinguir bien entre las clases, ya que los valores de <strong>ROC AUC</strong> superan los <strong>0.9</strong> en todos los casos, siendo el más alto de <strong>0.98</strong>, lo que refleja un desempeño notable en términos de discriminación.</p>
+<section id="posibles-razones">
+<h3><strong>Posibles razones</strong><a class="headerlink" href="#posibles-razones" title="Link to this heading">#</a></h3>
+<p>El buen rendimiento del modelo TF-IDF combinado con XGBoost puede atribuirse a diversos factores.</p>
+<p>Una de las razones es que este modelo fue el único que no utilizó embeddings ni modelos preentrenados, lo cual pudo haber sido beneficioso. Al trabajar directamente con las palabras del corpus, logró captar información específica y términos poco frecuentes que quizás no están bien representados en los vocabularios de modelos preentrenados, lo que favoreció su desempeño en este conjunto de datos en particular.</p>
+<p>Además, XGBoost es especialmente eficaz al manejar representaciones textuales extensas y dispersas, ya que puede identificar automáticamente las palabras más relevantes para distinguir entre clases. También tiende a ser menos susceptible al sobreajuste en comparación con modelos más complejos como los transformers o las redes neuronales, lo que contribuye a una mayor estabilidad en sus predicciones.</p>
+<p>Por otro lado, cada palabra se representa de forma explícita, mientras que los modelos preentrenados pueden llegar a cortar las palabras poco comunes en partes, lo que podría llevar a una pérdida de significado.</p>
+</section>
+<section id="limitaciones">
+<h3><strong>Limitaciones</strong><a class="headerlink" href="#limitaciones" title="Link to this heading">#</a></h3>
+<p>En este proyecto, identifiqué dos limitaciones frecuentes en los cinco modelos evaluados:</p>
+<ul class="simple">
+<li><p><strong>Clases minoritarias</strong>: Durante el análisis exploratorio de datos (EDA) se identificó un desbalance en la base de datos. Para reducirlo, se aplicó oversampling únicamente sobre las clases minoritarias como una forma de data augmentation para mejorar los modelos. No obstante, la categoría BPO, que contaba con la menor cantidad de curriculums desde un inicio, continuó presentando dificultades en la clasificación y, en general, obtuvo el peor desempeño entre las distintas clases. Este tipo de situaciones representa una limitación importante tanto para los modelos como para la obtención de mejores resultados.</p></li>
+<li><p><strong>Capacidad computacional</strong>: Otra limitación significativa fue la capacidad de mi computador, incluyendo GPU, VRAM y procesador. Debido al tamaño del dataset y a la necesidad de realizar hiperparametrización, en varios momentos tuve que reducir procesos o simplificar configuraciones, lo que limitó las oportunidades de entrenar algunos modelos de manera óptima y, posiblemente, de obtener resultados más altos.</p></li>
+</ul>
+</section>
+<section id="recomendaciones-de-mejora">
+<h3><strong>Recomendaciones de mejora</strong><a class="headerlink" href="#recomendaciones-de-mejora" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Balanceo entre clases</strong>: Explorar técnicas adicionales como combinaciones de oversampling y undersampling, o aplicar data augmentation más intensivo en las clases minoritarias. Esto puede contribuir a una mejor representación de dichas clases y mejorar el rendimiento de los modelos en la clasificación de casos menos frecuentes.</p></li>
+<li><p><strong>Optimización de recursos computacionales</strong>: Para facilitar el entrenamiento de modelos más complejos y permitir una búsqueda de hiperparámetros más exhaustiva, se pueden aplicar alternativas tales como reducir el tamaño de los lotes, optimizar el preprocesamiento del texto, o considerar el uso de computadores con capacidades más potentes.</p></li>
+<li><p><strong>Mejora en la comprensión contextual</strong>: Se podría probar con modelos que entienden mejor el significado de las palabras según el entorno en el que aparecen, como los que usan inteligencia artificial avanzada. Además, combinar varios modelos diferentes puede ayudar a que el sistema sea más preciso y confiable.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -488,9 +614,12 @@ See the YAML at the top of this page for example.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-cell">An example cell</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-notebook-with-myst-markdown">Create a notebook with MyST Markdown</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quickly-add-yaml-metadata-for-myst-notebooks">Quickly add YAML metadata for MyST Notebooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-de-metricas"><strong>Tabla comparativa de métricas</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#posibles-razones"><strong>Posibles razones</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones"><strong>Limitaciones</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recomendaciones-de-mejora"><strong>Recomendaciones de mejora</strong></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

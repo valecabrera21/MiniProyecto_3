@@ -1,0 +1,1744 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Análisis Exploratorio de Datos &#8212; MiniProyecto 3</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'eda';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Implementación de modelos" href="modelos.html" />
+    <link rel="prev" title="Mini Proyecto 3" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/Uninorte.png" class="logo__image only-light" alt="MiniProyecto 3 - Home"/>
+    <script>document.write(`<img src="_static/Uninorte.png" class="logo__image only-dark" alt="MiniProyecto 3 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    <div style="text-align: center;">Mini Proyecto 3</div>
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Análisis Exploratorio de Datos</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelos.html"><strong>Implementación de modelos</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="analisiscritico.html">Notebooks with MyST Markdown</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Feda.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/eda.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Análisis Exploratorio de Datos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias-y-modulos-necesarios"><strong>Librerías y módulos necesarios</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#base-de-datos-original"><strong>Base de datos original</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diccionario-de-variables"><strong>Diccionario de Variables</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sobre-los-datos"><strong>Sobre los datos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#category-variable-objetivo"><strong>Category: Variable Objetivo</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resume-str-variable-explicativa"><strong>Resume_str: Variable Explicativa</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#palabras-mas-frecuentes"><strong>Palabras más frecuentes</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bigramas"><strong>Bigramas</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#base-de-datos-final"><strong>Base de datos final</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analisis-exploratorio-de-datos">
+<h1><strong>Análisis Exploratorio de Datos</strong><a class="headerlink" href="#analisis-exploratorio-de-datos" title="Link to this heading">#</a></h1>
+<section id="librerias-y-modulos-necesarios">
+<h2><strong>Librerías y módulos necesarios</strong><a class="headerlink" href="#librerias-y-modulos-necesarios" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>  
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>                 
+<span class="kn">import</span><span class="w"> </span><span class="nn">nltk</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">string</span>             
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">trange</span> 
+<span class="kn">from</span><span class="w"> </span><span class="nn">nltk</span><span class="w"> </span><span class="kn">import</span> <span class="n">tokenize</span>                     
+<span class="kn">from</span><span class="w"> </span><span class="nn">bs4</span><span class="w"> </span><span class="kn">import</span> <span class="n">BeautifulSoup</span> 
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">wordcloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">WordCloud</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nltk.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nltk.probability</span><span class="w"> </span><span class="kn">import</span> <span class="n">FreqDist</span>  
+<span class="kn">from</span><span class="w"> </span><span class="nn">nltk.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_tokenize</span>     
+<span class="kn">from</span><span class="w"> </span><span class="nn">nltk.stem</span><span class="w"> </span><span class="kn">import</span> <span class="n">WordNetLemmatizer</span>  
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelEncoder</span>   
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountVectorizer</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;whitegrid&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;muted&#39;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">nltk</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;corpora/stopwords&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">LookupError</span><span class="p">:</span>
+    <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">nltk</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;tokenizers/punkt&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">LookupError</span><span class="p">:</span>
+    <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">nltk</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;tokenizers/punkt_tab&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">LookupError</span><span class="p">:</span>
+    <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt_tab&#39;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">nltk</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;corpora/wordnet&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">LookupError</span><span class="p">:</span>
+    <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;wordnet&#39;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">nltk</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;corpora/omw-1.4&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">LookupError</span><span class="p">:</span>
+    <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;omw-1.4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package wordnet to /home/valcd/nltk_data...
+[nltk_data]   Package wordnet is already up-to-date!
+[nltk_data] Downloading package omw-1.4 to /home/valcd/nltk_data...
+[nltk_data]   Package omw-1.4 is already up-to-date!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;omw-1.4&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s1">&#39;darkgrid&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">17</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">18</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="base-de-datos-original">
+<h2><strong>Base de datos original</strong><a class="headerlink" href="#base-de-datos-original" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/Resume.csv&#39;</span><span class="p">)</span>
+<span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Resume_str</th>
+      <th>Resume_html</th>
+      <th>Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>16852973</td>
+      <td>HR ADMINISTRATOR/MARKETING ASSOCIATE\...</td>
+      <td>&lt;div class="fontsize fontface vmargins hmargin...</td>
+      <td>HR</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>22323967</td>
+      <td>HR SPECIALIST, US HR OPERATIONS      ...</td>
+      <td>&lt;div class="fontsize fontface vmargins hmargin...</td>
+      <td>HR</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>33176873</td>
+      <td>HR DIRECTOR       Summary      Over 2...</td>
+      <td>&lt;div class="fontsize fontface vmargins hmargin...</td>
+      <td>HR</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>27018550</td>
+      <td>HR SPECIALIST       Summary    Dedica...</td>
+      <td>&lt;div class="fontsize fontface vmargins hmargin...</td>
+      <td>HR</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>17812897</td>
+      <td>HR MANAGER         Skill Highlights  ...</td>
+      <td>&lt;div class="fontsize fontface vmargins hmargin...</td>
+      <td>HR</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2479</th>
+      <td>99416532</td>
+      <td>RANK: SGT/E-5 NON- COMMISSIONED OFFIC...</td>
+      <td>&lt;div class="fontsize fontface vmargins hmargin...</td>
+      <td>AVIATION</td>
+    </tr>
+    <tr>
+      <th>2480</th>
+      <td>24589765</td>
+      <td>GOVERNMENT RELATIONS, COMMUNICATIONS ...</td>
+      <td>&lt;div class="fontsize fontface vmargins hmargin...</td>
+      <td>AVIATION</td>
+    </tr>
+    <tr>
+      <th>2481</th>
+      <td>31605080</td>
+      <td>GEEK SQUAD AGENT         Professional...</td>
+      <td>&lt;div class="fontsize fontface vmargins hmargin...</td>
+      <td>AVIATION</td>
+    </tr>
+    <tr>
+      <th>2482</th>
+      <td>21190805</td>
+      <td>PROGRAM DIRECTOR / OFFICE MANAGER    ...</td>
+      <td>&lt;div class="fontsize fontface vmargins hmargin...</td>
+      <td>AVIATION</td>
+    </tr>
+    <tr>
+      <th>2483</th>
+      <td>37473139</td>
+      <td>STOREKEEPER II       Professional Sum...</td>
+      <td>&lt;div class="fontsize fontface vmargins hmargin...</td>
+      <td>AVIATION</td>
+    </tr>
+  </tbody>
+</table>
+<p>2484 rows × 4 columns</p>
+</div></div></div>
+</div>
+<section id="diccionario-de-variables">
+<h3><strong>Diccionario de Variables</strong><a class="headerlink" href="#diccionario-de-variables" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Variable</strong></p></th>
+<th class="head"><p><strong>Descripción</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>ID</strong></p></td>
+<td><p>Identificador único y nombre del archivo correspondiente al PDF del currículum.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Resume_str</strong></p></td>
+<td><p>Texto del currículum en formato de cadena (string).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Resume_html</strong></p></td>
+<td><p>Datos del currículum en formato <strong>HTML</strong>, obtenidos durante el proceso de web scraping.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Category</strong></p></td>
+<td><p>Categoría del empleo al que corresponde el currículum. Las categorías incluyen: HR, Designer, Information-Technology, Teacher, Advocate, Business-Development, Healthcare, Fitness, Agriculture, BPO, Sales, Consultant, Digital-Media, Automobile, Chef, Finance, Apparel, Engineering, Accountant, Construction, Public-Relations, Banking, Arts, Aviation.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="sobre-los-datos">
+<h2><strong>Sobre los datos</strong><a class="headerlink" href="#sobre-los-datos" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2484, 4)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 2484 entries, 0 to 2483
+Data columns (total 4 columns):
+ #   Column       Non-Null Count  Dtype 
+---  ------       --------------  ----- 
+ 0   ID           2484 non-null   int64 
+ 1   Resume_str   2484 non-null   object
+ 2   Resume_html  2484 non-null   object
+ 3   Category     2484 non-null   object
+dtypes: int64(1), object(3)
+memory usage: 77.8+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<p>El conjunto de datos a utilizar consta de <strong>2484</strong> currículums y <strong>4</strong> variables descriptivas.</p>
+<p>Se observa que no se cuenta con datos nulos, sin embargo, al tratarse de datos textuales, vamos a detectar la presencia de cadenas de texto vacías.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verificar cadenas de texto vacías en &#39;Resume_str&#39; y &#39;Category&#39;</span>
+<span class="n">resumevacio</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Resume_str&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">categoryvacio</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Category&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="n">vacio</span> <span class="o">=</span> <span class="n">resumevacio</span> <span class="o">|</span> <span class="n">categoryvacio</span>
+
+<span class="n">ids_vacios</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">vacio</span><span class="p">,</span> <span class="s1">&#39;ID&#39;</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">ids_vacios</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No se encontró ningún ID con cadenas de textos vacías.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Se encontraron </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ids_vacios</span><span class="p">)</span><span class="si">}</span><span class="s2"> filas críticas con strings vacíos.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estos son sus IDs:&quot;</span><span class="p">,</span> <span class="n">ids_vacios</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Se encontraron 1 filas críticas con strings vacíos.
+Estos son sus IDs: [12632728]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">ids_vacios</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Resume_str</th>
+      <th>Resume_html</th>
+      <th>Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>656</th>
+      <td>12632728</td>
+      <td></td>
+      <td>&lt;div class="fontsize fontface vmargins hmargin...</td>
+      <td>BUSINESS-DEVELOPMENT</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>La información obtenida indica que la observación correspondiente al currículum con <strong>ID 12632728</strong>	tiene información faltante en <strong><code class="docutils literal notranslate"><span class="pre">Resume_str</span></code></strong>, por tanto, intentaremos extraer la información de <strong><code class="docutils literal notranslate"><span class="pre">Resume_html</span></code></strong>.</p>
+<p>Esto solo se hace por práctica pues se sabe que la información que se tiene en ambas variables no varía entre ellas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualizar el contenido HTML de un currículum específico</span>
+<span class="n">html_content</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;ID&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">12632728</span><span class="p">][</span><span class="s2">&quot;Resume_html&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html_content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+<span class="n">all_text</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">get_text</span><span class="p">(</span><span class="n">separator</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>  
+<span class="n">all_text</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39; \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n &#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Este resultado confirma que el currículum adjuntado no contiene información para nuestro ejercicio de interés. Debido a esto, procederemos a eliminarla del conjunto de datos.</p>
+<p>A su vez, eliminaremos las columnas de <strong><code class="docutils literal notranslate"><span class="pre">ID</span></code></strong> y <strong><code class="docutils literal notranslate"><span class="pre">Resume_html</span></code></strong>, pues a este punto ya no tienen importancia dentro de nuestra tarea.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">12632728</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Resume_html&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Resume_str</th>
+      <th>Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>HR ADMINISTRATOR/MARKETING ASSOCIATE\...</td>
+      <td>HR</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>HR SPECIALIST, US HR OPERATIONS      ...</td>
+      <td>HR</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>HR DIRECTOR       Summary      Over 2...</td>
+      <td>HR</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>HR SPECIALIST       Summary    Dedica...</td>
+      <td>HR</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>HR MANAGER         Skill Highlights  ...</td>
+      <td>HR</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2478</th>
+      <td>RANK: SGT/E-5 NON- COMMISSIONED OFFIC...</td>
+      <td>AVIATION</td>
+    </tr>
+    <tr>
+      <th>2479</th>
+      <td>GOVERNMENT RELATIONS, COMMUNICATIONS ...</td>
+      <td>AVIATION</td>
+    </tr>
+    <tr>
+      <th>2480</th>
+      <td>GEEK SQUAD AGENT         Professional...</td>
+      <td>AVIATION</td>
+    </tr>
+    <tr>
+      <th>2481</th>
+      <td>PROGRAM DIRECTOR / OFFICE MANAGER    ...</td>
+      <td>AVIATION</td>
+    </tr>
+    <tr>
+      <th>2482</th>
+      <td>STOREKEEPER II       Professional Sum...</td>
+      <td>AVIATION</td>
+    </tr>
+  </tbody>
+</table>
+<p>2483 rows × 2 columns</p>
+</div></div></div>
+</div>
+<p>En este orden de ideas, la base de datos que utilizaremos de ahora en adelante contiene un total de <strong>2483</strong> observaciones y las dos variables relevantes para la clasificación de los currículums por área o trabajo aplicado.</p>
+<p>A continuación, analizaremos cada variable.</p>
+<section id="category-variable-objetivo">
+<h3><strong>Category: Variable Objetivo</strong><a class="headerlink" href="#category-variable-objetivo" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_categorias</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Category&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;En total, estamos trabajando con </span><span class="si">{</span><span class="n">num_categorias</span><span class="si">}</span><span class="s2"> categorías diferentes.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Category&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>En total, estamos trabajando con 24 categorías diferentes.
+
+[&#39;HR&#39; &#39;DESIGNER&#39; &#39;INFORMATION-TECHNOLOGY&#39; &#39;TEACHER&#39; &#39;ADVOCATE&#39;
+ &#39;BUSINESS-DEVELOPMENT&#39; &#39;HEALTHCARE&#39; &#39;FITNESS&#39; &#39;AGRICULTURE&#39; &#39;BPO&#39; &#39;SALES&#39;
+ &#39;CONSULTANT&#39; &#39;DIGITAL-MEDIA&#39; &#39;AUTOMOBILE&#39; &#39;CHEF&#39; &#39;FINANCE&#39; &#39;APPAREL&#39;
+ &#39;ENGINEERING&#39; &#39;ACCOUNTANT&#39; &#39;CONSTRUCTION&#39; &#39;PUBLIC-RELATIONS&#39; &#39;BANKING&#39;
+ &#39;ARTS&#39; &#39;AVIATION&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Category&#39;</span><span class="p">],</span>
+    <span class="n">order</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Category&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+    <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;YlGnBu&#39;</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Distribución de Clases (Nº de Currículums por Categoría)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Conteo&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Categoría&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">patch</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">patches</span><span class="p">:</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">patch</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span>
+    
+    <span class="n">y_pos</span> <span class="o">=</span> <span class="n">patch</span><span class="o">.</span><span class="n">get_y</span><span class="p">()</span> <span class="o">+</span> <span class="n">patch</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y_pos</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">count</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4163564f4a8c5dfed5efaea98f9b4171628de78f6784548ba821ab84a545ab24.png" src="_images/4163564f4a8c5dfed5efaea98f9b4171628de78f6784548ba821ab84a545ab24.png" />
+</div>
+</div>
+<p>Al analizar la distribución de clases en el gráfico, se observa que el conjunto de datos presenta un desbalanceo moderado.</p>
+<p>Se puede ver claramente que las muestras no están repartidas de forma equitativa entre las 24 categorías. Existe una diferencia notable entre la categoría más frecuente (con <strong>120</strong> muestras) y la menos frecuente (con solo <strong>22</strong>). La clase más común es más de 5 veces mayor que la más pequeña.</p>
+</section>
+<section id="resume-str-variable-explicativa">
+<h3><strong>Resume_str: Variable Explicativa</strong><a class="headerlink" href="#resume-str-variable-explicativa" title="Link to this heading">#</a></h3>
+<p>Para el análisis de esta variable, vamos a considerar dos aspectos fundamentales: la estructura de la información y el contenido de la misma. Esto con el fin de extraer todo el conocimiento posible y relevante.</p>
+<ul>
+<li><h4 class="rubric" id="longitud-de-los-textos"><strong>Longitud de los textos</strong></h4>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cantidad total de caracteres por currículum</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;Character_Count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Resume_str&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+
+<span class="c1"># Cantidad total de palabras por currículum</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;Word_Count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Resume_str&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
+
+<span class="c1"># Promedio de caracteres por palabra por currículum</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;Mean_Character_Per_Word&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Resume_str&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+<span class="p">)</span>
+
+<span class="c1"># Promedio de palabras por oración por currículum</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;Mean_Words_Per_Sentence&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Resume_str&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">sent</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">tokenize</span><span class="o">.</span><span class="n">sent_tokenize</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))])</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokenize</span><span class="o">.</span><span class="n">sent_tokenize</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Resume_str</th>
+      <th>Category</th>
+      <th>Character_Count</th>
+      <th>Word_Count</th>
+      <th>Mean_Character_Per_Word</th>
+      <th>Mean_Words_Per_Sentence</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>HR ADMINISTRATOR/MARKETING ASSOCIATE\...</td>
+      <td>HR</td>
+      <td>5442</td>
+      <td>674</td>
+      <td>6.459941</td>
+      <td>25.923077</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>HR SPECIALIST, US HR OPERATIONS      ...</td>
+      <td>HR</td>
+      <td>5572</td>
+      <td>708</td>
+      <td>6.307910</td>
+      <td>26.222222</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>HR DIRECTOR       Summary      Over 2...</td>
+      <td>HR</td>
+      <td>7720</td>
+      <td>1017</td>
+      <td>6.218289</td>
+      <td>26.763158</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>HR SPECIALIST       Summary    Dedica...</td>
+      <td>HR</td>
+      <td>2855</td>
+      <td>379</td>
+      <td>5.997361</td>
+      <td>22.294118</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>HR MANAGER         Skill Highlights  ...</td>
+      <td>HR</td>
+      <td>9172</td>
+      <td>1206</td>
+      <td>6.368159</td>
+      <td>21.927273</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2478</th>
+      <td>RANK: SGT/E-5 NON- COMMISSIONED OFFIC...</td>
+      <td>AVIATION</td>
+      <td>5533</td>
+      <td>752</td>
+      <td>5.655585</td>
+      <td>30.080000</td>
+    </tr>
+    <tr>
+      <th>2479</th>
+      <td>GOVERNMENT RELATIONS, COMMUNICATIONS ...</td>
+      <td>AVIATION</td>
+      <td>7108</td>
+      <td>902</td>
+      <td>6.505543</td>
+      <td>19.191489</td>
+    </tr>
+    <tr>
+      <th>2480</th>
+      <td>GEEK SQUAD AGENT         Professional...</td>
+      <td>AVIATION</td>
+      <td>2020</td>
+      <td>241</td>
+      <td>6.431535</td>
+      <td>16.066667</td>
+    </tr>
+    <tr>
+      <th>2481</th>
+      <td>PROGRAM DIRECTOR / OFFICE MANAGER    ...</td>
+      <td>AVIATION</td>
+      <td>5074</td>
+      <td>683</td>
+      <td>6.008785</td>
+      <td>22.766667</td>
+    </tr>
+    <tr>
+      <th>2482</th>
+      <td>STOREKEEPER II       Professional Sum...</td>
+      <td>AVIATION</td>
+      <td>5234</td>
+      <td>681</td>
+      <td>6.311307</td>
+      <td>19.457143</td>
+    </tr>
+  </tbody>
+</table>
+<p>2483 rows × 6 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Character_Count</th>
+      <th>Word_Count</th>
+      <th>Mean_Character_Per_Word</th>
+      <th>Mean_Words_Per_Sentence</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>2483.000000</td>
+      <td>2483.000000</td>
+      <td>2483.000000</td>
+      <td>2483.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>6297.835683</td>
+      <td>811.652437</td>
+      <td>6.306148</td>
+      <td>32.660416</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>2766.943443</td>
+      <td>370.723976</td>
+      <td>0.370578</td>
+      <td>43.456547</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>881.000000</td>
+      <td>113.000000</td>
+      <td>4.559471</td>
+      <td>8.516854</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>5162.500000</td>
+      <td>651.000000</td>
+      <td>6.107087</td>
+      <td>17.336022</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>5887.000000</td>
+      <td>757.000000</td>
+      <td>6.332180</td>
+      <td>21.542857</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>7227.500000</td>
+      <td>933.000000</td>
+      <td>6.549290</td>
+      <td>30.106443</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>38842.000000</td>
+      <td>5190.000000</td>
+      <td>7.551282</td>
+      <td>974.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metricas</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s1">&#39;Character_Count&#39;</span><span class="p">,</span> <span class="s1">&#39;Número de caracteres&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;Word_Count&#39;</span><span class="p">,</span> <span class="s1">&#39;Número de palabras&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;Mean_Character_Per_Word&#39;</span><span class="p">,</span> <span class="s1">&#39;Promedio de caracteres por palabra&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;Mean_Words_Per_Sentence&#39;</span><span class="p">,</span> <span class="s1">&#39;Promedio de palabras por oración&#39;</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">metric_name</span><span class="p">,</span> <span class="n">metric_label</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">metricas</span><span class="p">):</span>
+    
+    <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">metric_name</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Histograma de </span><span class="si">{</span><span class="n">metric_label</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia&#39;</span><span class="p">)</span>
+
+    <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="n">metric_name</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Boxplot de </span><span class="si">{</span><span class="n">metric_label</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">metric_label</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/00438eee22d7988be393ee6cbe1078fb990d8a2ff1bdd6af3bb19ef7e920e0c3.png" src="_images/00438eee22d7988be393ee6cbe1078fb990d8a2ff1bdd6af3bb19ef7e920e0c3.png" />
+</div>
+</div>
+<p>Luego de haber calculado las métricas, los resultados obtenidos respecto al análisis de estas son:</p>
+<ul>
+<li><p><strong>Character_Count</strong>: Entre los <strong>2483</strong> currículums, el más corto tiene <strong>881</strong> caracteres, mientras que el más extenso alcanza <strong>38842</strong>. Esta diferencia refleja una alta variabilidad en la longitud de los textos. En promedio, los documentos contienen <strong>6297</strong> caracteres, con una desviación estándar de aproximadamente <strong>2766.94</strong>, lo cual evidencia una dispersión considerable.</p>
+<p>En el histograma, la mayoría de los currículums se agrupan hacia el lado izquierdo, concentrándose principalmente en longitudes menores a <strong>10000</strong> caracteres. Sin embargo, se aprecia una cola larga hacia la derecha, lo que significa que existen algunos currículums excepcionalmente largos que actúan como outliers extremos, alcanzando valores cercanos a los <strong>40000</strong> caracteres.</p>
+<p>En el boxplot, se observa la presencia de valores atípicos en ambos extremos. Los valores inferiores tienden a concentrarse más entre sí, mientras que los superiores muestran una mayor dispersión. Ambos bigotes presentan una longitud similar y no excesiva, lo que sugiere que los datos dentro de los primeros y últimos cuartiles no difieren drásticamente entre sí. El rango intercuartílico (de <strong>5,162.5</strong> a <strong>7,227.5</strong>) es relativamente estrecho, indicando que la mayoría de los currículums presentan longitudes moderadas y consistentes.</p>
+</li>
+<li><p><strong>Word_Count</strong>: En cuanto a la cantidad de palabras, el currículum más corto contiene <strong>113</strong> palabras, mientras que el más extenso alcanza <strong>5190</strong>, lo que evidencia nuevamente una alta variabilidad en la extensión de los textos. El promedio de palabras por currículum es de <strong>811.65</strong>, con una desviación estándar de <strong>370.72</strong>, lo que indica una dispersión considerable alrededor de la media.</p>
+<p>El histograma muestra que la mayoría de los currículums se concentran por debajo de las <strong>1000</strong> palabras, mientras que una pequeña proporción presenta longitudes muy superiores, lo que genera una cola larga hacia la derecha. Esto confirma lo observado en las estadísticas descriptivas donde la mediana es mucho menor que los pocos casos extremos que sobrepasan las <strong>5000</strong> palabras.</p>
+<p>El diagrama de caja y bigotes refleja este mismo comportamiento. Se observan valores atípicos en ambos extremos, con los inferiores más agrupados entre sí y los superiores más dispersos. Los bigotes presentan una longitud similar y moderada, lo que sugiere que los valores dentro de los primeros y últimos cuartiles no presentan diferencias muy marcadas. En general, el rango intercuartílico es relativamente estrecho, lo que indica cierta consistencia entre la mayoría de los currículums.</p>
+<p>Además, tal como se observa en la tabla de medidas, el <strong>75%</strong> de los currículums contiene menos de <strong>1000</strong> palabras, confirmando que los casos extremadamente largos son atípicos.</p>
+</li>
+<li><p><strong>Mean_Character_Per_Word</strong>: Los resultados varían entre <strong>4.55</strong> y <strong>7.55</strong> caracteres, un rango bastante estrecho que muestra poca variabilidad en la longitud de las palabras usadas. El promedio global es de <strong>6.3</strong> caracteres, con una desviación estándar de <strong>0.37</strong>, lo que significa que la mayoría de los currículums utilizan palabras de una longitud muy similar. Además, la media (<strong>6.3</strong>) y la mediana (<strong>6.33</strong>) son casi iguales, lo que confirma que los datos están bien equilibrados y simétricos.</p>
+<p>El histograma muestra una distribución casi normal, con una forma de campana centrada alrededor de <strong>6.3</strong> caracteres aproximadamente. Esto indica que, sin importar la extensión del currículum o la categoría correspondiente, las personas tienden a usar palabras de longitud media de manera bastante constante. En otras palabras, hay una consistencia en el estilo de escritura entre todos los currículums de la base de datos.</p>
+<p>Por su parte, el boxplot confirma lo anterior pues aunque se observan algunos valores atípicos tanto por debajo como por encima del promedio, estos no afectan significativamente la tendencia general. Los bigotes son de longitud similar y la caja es casi simétrica, lo que refuerza la idea de que los datos están bien distribuidos. Entre el primer cuartil (<strong>6.1</strong>) y el tercer cuartil (<strong>6.54</strong>) se concentra el <strong>50%</strong> central de los currículums, lo que demuestra que la longitud promedio de las palabras es muy parecida en la mayoría de los casos.</p>
+</li>
+<li><p><strong>Mean_Words_Per_Sentence</strong>: El promedio de palabras por oración muestra bastante variación entre los currículums. En promedio, cada oración tiene unas <strong>32</strong> palabras, pero la desviación estándar es alta (<strong>43.45</strong>), lo que indica que no todos siguen el mismo patrón: algunos textos usan oraciones cortas y directas, mientras que otros se extienden mucho más.</p>
+<p>En el histograma se nota claramente una distribución sesgada hacia la derecha, es decir, la mayoría de los currículums tienden a tener oraciones cortas, pero hay algunos casos donde las oraciones son muy largas, incluso llegando a más de <strong>900</strong> palabras por oración, lo cual es bastante inusual.</p>
+<p>El boxplot refuerza esta idea: la mayoría de los valores están concentrados al inicio del eje, mientras que los outliers superiores muestran esos pocos currículums con oraciones excesivamente largas. En general, esto sugiere que la forma de redactar varía bastante entre personas; sin embargo, la tendencia general apunta a un estilo más conciso, con frases relativamente cortas y directas.</p>
+<p>Es importante mencionar que algunos de estos valores tan altos podrían deberse a errores en la segmentación de oraciones (por ejemplo, por ausencia de signos de puntuación o fallos en la función <code class="docutils literal notranslate"><span class="pre">sent_tokenize</span></code>). Por esta razón, se considera que esta variable puede no ser completamente fiable y, por lo tanto, se decide descartarla del análisis.</p>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Mean_Words_Per_Sentence&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>    
+</pre></div>
+</div>
+</div>
+</div>
+<ul>
+<li><h4 class="rubric" id="palabras-mas-frecuentes-y-n-gramas-relevantes"><strong>Palabras más frecuentes y N-gramas relevantes</strong></h4>
+</li>
+</ul>
+<p>Para encontrar esta información, primero se hará una limpieza de los datos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s1">&#39;Resume_str&#39;</span><span class="p">,</span> <span class="s1">&#39;Category&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Preprocesamiento general de texto -- Válido para los 5 modelos</span>
+
+<span class="n">stop_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">))</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">limpiezatexto</span><span class="p">(</span><span class="n">texto</span><span class="p">):</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">texto</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    
+    <span class="n">texto</span> <span class="o">=</span> <span class="n">texto</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">texto</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;http\S+|www\S+|https\S+&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">texto</span><span class="p">)</span> <span class="c1"># elimina URLs</span>
+    <span class="n">texto</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\S+@\S+&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">texto</span><span class="p">)</span> <span class="c1"># elimina correos electrónicos</span>
+    <span class="n">texto</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\d+&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">texto</span><span class="p">)</span>  <span class="c1"># elimina números</span>
+    <span class="n">texto</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[^\w\s]&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">texto</span><span class="p">)</span>  <span class="c1"># elimina puntuación</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">texto</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="c1"># separa en tokens</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="n">w</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">]</span> <span class="c1"># elimina stopwords</span>
+    <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Resume_str_clean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Resume_str&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">limpiezatexto</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Resume_str</th>
+      <th>Category</th>
+      <th>Resume_str_clean</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>HR ADMINISTRATOR/MARKETING ASSOCIATE\...</td>
+      <td>HR</td>
+      <td>hr administrator marketing associate hr admini...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>HR SPECIALIST, US HR OPERATIONS      ...</td>
+      <td>HR</td>
+      <td>hr specialist us hr operations summary versati...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>HR DIRECTOR       Summary      Over 2...</td>
+      <td>HR</td>
+      <td>hr director summary years experience recruitin...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>HR SPECIALIST       Summary    Dedica...</td>
+      <td>HR</td>
+      <td>hr specialist summary dedicated driven dynamic...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>HR MANAGER         Skill Highlights  ...</td>
+      <td>HR</td>
+      <td>hr manager skill highlights hr skills hr depar...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2478</th>
+      <td>RANK: SGT/E-5 NON- COMMISSIONED OFFIC...</td>
+      <td>AVIATION</td>
+      <td>rank sgt e non commissioned officer charge bri...</td>
+    </tr>
+    <tr>
+      <th>2479</th>
+      <td>GOVERNMENT RELATIONS, COMMUNICATIONS ...</td>
+      <td>AVIATION</td>
+      <td>government relations communications organizati...</td>
+    </tr>
+    <tr>
+      <th>2480</th>
+      <td>GEEK SQUAD AGENT         Professional...</td>
+      <td>AVIATION</td>
+      <td>geek squad agent professional profile support ...</td>
+    </tr>
+    <tr>
+      <th>2481</th>
+      <td>PROGRAM DIRECTOR / OFFICE MANAGER    ...</td>
+      <td>AVIATION</td>
+      <td>program director office manager summary highly...</td>
+    </tr>
+    <tr>
+      <th>2482</th>
+      <td>STOREKEEPER II       Professional Sum...</td>
+      <td>AVIATION</td>
+      <td>storekeeper ii professional summary purpose do...</td>
+    </tr>
+  </tbody>
+</table>
+<p>2483 rows × 3 columns</p>
+</div></div></div>
+</div>
+<section id="palabras-mas-frecuentes">
+<h4><strong>Palabras más frecuentes</strong><a class="headerlink" href="#palabras-mas-frecuentes" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Conversión a listas de palabras</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Resume_lists&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Resume_str_clean&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="c1"># Agrupar listas de palabras en un solo corpus</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">trange</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">corpus</span> <span class="o">+=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Resume_lists&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+
+<span class="c1"># Contar la frecuencia de cada palabra</span>
+<span class="n">freqpalabras</span> <span class="o">=</span> <span class="n">FreqDist</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+
+<span class="c1"># Top 20 Palabras Más Comunes</span>
+<span class="n">topcomunes</span> <span class="o">=</span> <span class="n">freqpalabras</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">dftop</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">topcomunes</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Palabra&#39;</span><span class="p">,</span> <span class="s1">&#39;Frecuencia&#39;</span><span class="p">])</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Frecuencia&#39;</span><span class="p">,</span> 
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Palabra&#39;</span><span class="p">,</span> 
+    <span class="n">data</span><span class="o">=</span><span class="n">dftop</span><span class="p">,</span> 
+    <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;YlGnBu&#39;</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Top 20 Palabras Más Comunes en General&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Palabra&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">patch</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">patches</span><span class="p">:</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">patch</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span>
+    
+    <span class="n">y_pos</span> <span class="o">=</span> <span class="n">patch</span><span class="o">.</span><span class="n">get_y</span><span class="p">()</span> <span class="o">+</span> <span class="n">patch</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y_pos</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">count</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 2483/2483 [00:00&lt;00:00, 73914.87it/s]
+</pre></div>
+</div>
+<img alt="_images/115b4cbb38a01c2980e090d526ec01f51cb9d38ff0be605a260f14a86e14c937.png" src="_images/115b4cbb38a01c2980e090d526ec01f51cb9d38ff0be605a260f14a86e14c937.png" />
+</div>
+</div>
+<p>A partir del diagrama de barras, podemos ver que la palabra más frecuente considerando todos los currículums es <strong><code class="docutils literal notranslate"><span class="pre">state</span></code></strong> (<strong>16156</strong>), lo cual tiene bastante sentido, ya que en este tipo de documentos es común hacer referencia a lugares relacionados con el nacimiento, la educación o el trabajo. De hecho, muchas personas mencionan instituciones o experiencias que incluyen nombres de estados o ciudades, lo que explica también la alta frecuencia de palabras como <strong><code class="docutils literal notranslate"><span class="pre">company</span></code></strong> (<strong>15212</strong>) y <strong><code class="docutils literal notranslate"><span class="pre">city</span></code></strong> (<strong>15077</strong>), que suelen aparecer al describir ubicaciones laborales o académicas.</p>
+<p>Por otro lado, destacan términos más vinculados con el contenido profesional de los currículums, como <strong><code class="docutils literal notranslate"><span class="pre">management</span></code></strong> (<strong>12173</strong>), <strong><code class="docutils literal notranslate"><span class="pre">customer</span></code></strong> (<strong>7927</strong>), <strong><code class="docutils literal notranslate"><span class="pre">business</span></code></strong> (<strong>7866</strong>), <strong><code class="docutils literal notranslate"><span class="pre">development</span></code></strong> (<strong>5731</strong>) y <strong><code class="docutils literal notranslate"><span class="pre">project</span></code></strong> (<strong>5362</strong>). Estas palabras reflejan habilidades de liderazgo, buen trabajo con clientes y desarrollo de proyectos, lo que sugiere que muchos candidatos buscan resaltar sus capacidades en de gestión, creación y/o coordinación dentro de un entorno laboral.</p>
+<p>También aparecen con frecuencia palabras como <strong><code class="docutils literal notranslate"><span class="pre">skills</span></code></strong> (<strong>7729</strong>), <strong><code class="docutils literal notranslate"><span class="pre">team</span></code></strong> (<strong>6073</strong>) y <strong><code class="docutils literal notranslate"><span class="pre">experience</span></code></strong> (<strong>5631</strong>), lo cual muestra que buena parte de los currículums hacen énfasis en competencias interpersonales y trabajo en equipo, algo muy valorado en la mayoría de las profesiones y compañías.</p>
+</section>
+<section id="bigramas">
+<h4><strong>Bigramas</strong><a class="headerlink" href="#bigramas" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Inicializar el CountVectorizer </span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="n">bigrama</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Resume_str_clean&#39;</span><span class="p">])</span>
+<span class="n">sum_bigramas</span> <span class="o">=</span> <span class="n">bigrama</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> 
+<span class="n">contador</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">sum_bigramas</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+
+<span class="c1"># DataFrame de frecuencias</span>
+<span class="n">ngram_freq</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([(</span><span class="n">contador</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cv</span><span class="o">.</span><span class="n">vocabulary_</span><span class="o">.</span><span class="n">items</span><span class="p">()],</span> <span class="n">reverse</span> <span class="o">=</span> <span class="kc">True</span><span class="p">))</span>
+<span class="n">ngram_freq</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;frequency&quot;</span><span class="p">,</span> <span class="s2">&quot;ngram&quot;</span><span class="p">]</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">ngram_freq</span><span class="p">[</span><span class="s1">&#39;frequency&#39;</span><span class="p">][:</span><span class="mi">20</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">ngram_freq</span><span class="p">[</span><span class="s1">&#39;ngram&#39;</span><span class="p">][:</span><span class="mi">20</span><span class="p">],</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;YlGnBu&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Top 20 Bigramas Más Comunes en General&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Bigrama&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">patch</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">patches</span><span class="p">:</span>
+    
+    <span class="n">count</span> <span class="o">=</span> <span class="n">patch</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span>
+    <span class="n">y_pos</span> <span class="o">=</span> <span class="n">patch</span><span class="o">.</span><span class="n">get_y</span><span class="p">()</span> <span class="o">+</span> <span class="n">patch</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">count</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="n">y_pos</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">count</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0023d1c83f95b4a3764a0f647cac430e3f495af1c8d41be568dfea6d8c83360b.png" src="_images/0023d1c83f95b4a3764a0f647cac430e3f495af1c8d41be568dfea6d8c83360b.png" />
+</div>
+</div>
+<p>En el gráfico de bigramas más frecuentes se observa que las combinaciones <strong><code class="docutils literal notranslate"><span class="pre">city</span> <span class="pre">state</span></code></strong> (<strong>14107</strong>), <strong><code class="docutils literal notranslate"><span class="pre">company</span> <span class="pre">name</span></code></strong> (<strong>11563</strong>) y <strong><code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">city</span></code></strong> (<strong>9900</strong>) son las más comunes. Esto tiene sentido, ya que en la mayoría de los currículums se incluyen datos personales, direcciones o nombres de empresas, por lo que es normal que aparezcan juntas palabras relacionadas con lugares y compañías.</p>
+<p>Después de estas, encontramos bigramas como <strong><code class="docutils literal notranslate"><span class="pre">customer</span> <span class="pre">service</span></code></strong> (<strong>3061</strong>), <strong><code class="docutils literal notranslate"><span class="pre">project</span> <span class="pre">management</span></code></strong> (<strong>1198</strong>), <strong><code class="docutils literal notranslate"><span class="pre">business</span> <span class="pre">development</span></code></strong> (<strong>914</strong>) o <strong><code class="docutils literal notranslate"><span class="pre">human</span> <span class="pre">resource</span></code></strong> (<strong>819</strong>),, que reflejan áreas laborales y habilidades clave que los candidatos suelen destacar. Estos términos indican que una buena parte de los currículums proviene de personas con experiencia en gestión, atención al cliente y desarrollo organizacional.</p>
+<p>También aparecen combinaciones como <strong><code class="docutils literal notranslate"><span class="pre">microsoft</span> <span class="pre">office</span></code></strong> (<strong>1147</strong>), <strong><code class="docutils literal notranslate"><span class="pre">communication</span> <span class="pre">skills</span></code></strong> (<strong>842</strong>) o <strong><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">relations</span></code></strong> (<strong>783</strong>), que refuerzan la tendencia a mencionar competencias técnicas e interpersonales.</p>
+<p>Además, expresiones como <strong><code class="docutils literal notranslate"><span class="pre">high</span> <span class="pre">school</span></code></strong> (<strong>1080</strong>) o <strong><code class="docutils literal notranslate"><span class="pre">bachelor</span> <span class="pre">science</span></code></strong> (<strong>769</strong>) muestran la presencia de información educativa, algo básico en este tipo de documentos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">categorias</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Category&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+
+<span class="n">n_cols</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">n_rows</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">num_categorias</span> <span class="o">/</span> <span class="n">n_cols</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">categoria</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">categorias</span><span class="p">):</span>
+    
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">texto_categoria</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Category&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">categoria</span><span class="p">][</span><span class="s1">&#39;Resume_str_clean&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">texto_categoria</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Categoría: </span><span class="si">{</span><span class="n">categoria</span><span class="si">}</span><span class="s2"> (Sin texto)&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+        <span class="k">continue</span>
+    
+    <span class="n">wordcloud_cat</span> <span class="o">=</span> <span class="n">WordCloud</span><span class="p">(</span>
+        <span class="n">width</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span>
+        <span class="n">height</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+        <span class="n">background_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+        <span class="n">max_words</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+        <span class="n">colormap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">texto_categoria</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wordcloud_cat</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;bilinear&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Categoría: </span><span class="si">{</span><span class="n">categoria</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6607adc607e830e090d4b6e8a90f6cf5f7aec53bb4ec36faf396e1e367047d47.png" src="_images/6607adc607e830e090d4b6e8a90f6cf5f7aec53bb4ec36faf396e1e367047d47.png" />
+</div>
+</div>
+<p>Finalmente, luego de haber analizado el contenido de los currículums de manera general, estas nubes de palabras nos permiten identificar las palabras y bigramas más frecuentes en cada categoría. A partir de ellas, se observa que cada área tiene términos característicos que reflejan sus propias dinámicas y enfoques.</p>
+</section>
+</section>
+</section>
+<section id="base-de-datos-final">
+<h2><strong>Base de datos final</strong><a class="headerlink" href="#base-de-datos-final" title="Link to this heading">#</a></h2>
+<p>Como paso final de este Análisis Exploratorio de Datos, se hará el preprocesamiento faltante correspondiente al dataset con el fin de tener información de utilidad para la implementación posterior de los modelos.</p>
+<p>Cabe mencionar que ya se hizo la limpieza de los datos; de ahí obtuvimos el conjunto <code class="docutils literal notranslate"><span class="pre">df</span></code>. Ahora, realizaremos la codificación de la variable <strong><code class="docutils literal notranslate"><span class="pre">Category</span></code></strong> para que los modelos puedan identificar y clasificar correctamente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">encoder</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Category_code&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Category&#39;</span><span class="p">])</span>
+<span class="n">label_mapping</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span> <span class="n">encoder</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">)))</span>
+<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Resume_lists&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;dataprocesada.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Resume_str</th>
+      <th>Category</th>
+      <th>Resume_str_clean</th>
+      <th>Category_code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>HR ADMINISTRATOR/MARKETING ASSOCIATE\...</td>
+      <td>HR</td>
+      <td>hr administrator marketing associate hr admini...</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>HR SPECIALIST, US HR OPERATIONS      ...</td>
+      <td>HR</td>
+      <td>hr specialist us hr operations summary versati...</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>HR DIRECTOR       Summary      Over 2...</td>
+      <td>HR</td>
+      <td>hr director summary years experience recruitin...</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>HR SPECIALIST       Summary    Dedica...</td>
+      <td>HR</td>
+      <td>hr specialist summary dedicated driven dynamic...</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>HR MANAGER         Skill Highlights  ...</td>
+      <td>HR</td>
+      <td>hr manager skill highlights hr skills hr depar...</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2478</th>
+      <td>RANK: SGT/E-5 NON- COMMISSIONED OFFIC...</td>
+      <td>AVIATION</td>
+      <td>rank sgt e non commissioned officer charge bri...</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>2479</th>
+      <td>GOVERNMENT RELATIONS, COMMUNICATIONS ...</td>
+      <td>AVIATION</td>
+      <td>government relations communications organizati...</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>2480</th>
+      <td>GEEK SQUAD AGENT         Professional...</td>
+      <td>AVIATION</td>
+      <td>geek squad agent professional profile support ...</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>2481</th>
+      <td>PROGRAM DIRECTOR / OFFICE MANAGER    ...</td>
+      <td>AVIATION</td>
+      <td>program director office manager summary highly...</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>2482</th>
+      <td>STOREKEEPER II       Professional Sum...</td>
+      <td>AVIATION</td>
+      <td>storekeeper ii professional summary purpose do...</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+<p>2483 rows × 4 columns</p>
+</div></div></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><div style="text-align: center;">Mini Proyecto 3</div></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="modelos.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Implementación de modelos</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias-y-modulos-necesarios"><strong>Librerías y módulos necesarios</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#base-de-datos-original"><strong>Base de datos original</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diccionario-de-variables"><strong>Diccionario de Variables</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sobre-los-datos"><strong>Sobre los datos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#category-variable-objetivo"><strong>Category: Variable Objetivo</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resume-str-variable-explicativa"><strong>Resume_str: Variable Explicativa</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#palabras-mas-frecuentes"><strong>Palabras más frecuentes</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bigramas"><strong>Bigramas</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#base-de-datos-final"><strong>Base de datos final</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Valentina Esther Cabrera De la Rosa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
